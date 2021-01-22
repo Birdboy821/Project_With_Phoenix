@@ -7,6 +7,7 @@ public class MouseLook : MonoBehaviour
     public float mouseSpeed = 100f;
     public Transform playerBody;
     public float yRotation = 0f;
+    public GameObject centerPoint;
 
     void Start()
     {
@@ -19,9 +20,9 @@ public class MouseLook : MonoBehaviour
 
 
         yRotation -= mouseY;
-        yRotation = Mathf.Clamp(yRotation, -90f, 35f);
+        yRotation = Mathf.Clamp(yRotation, -10f, 45f);
 
-        transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
+        centerPoint.transform.localRotation = Quaternion.Euler(yRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
     }
 }

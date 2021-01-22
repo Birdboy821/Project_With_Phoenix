@@ -7,10 +7,8 @@ public class MovementScript : MonoBehaviour
     public CharacterController controller;
 
     public float speed = 10f;
-    public float normalSpeed = 10f;
     public float gravity = -10f;
     public float jumpHeight = 5f;
-    public float sprintMod = 2;
 
     public Transform groundCheck;
     public float groundDistance = 0.4f;
@@ -26,15 +24,6 @@ public class MovementScript : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.R) && isGrounded && normalSpeed == speed)
-        {
-            speed *= sprintMod;
-        }
-        else if (Input.GetKeyUp(KeyCode.R) && isGrounded && normalSpeed == speed / sprintMod)
-        {
-            speed /= sprintMod;
         }
 
 
