@@ -10,6 +10,7 @@ public class PlayersTeam : MonoBehaviour
     void Start()
     {
         companionOne = GameObject.Find("Ze");
+        companionTwo = GameObject.Find("Xiuhcoatl");
     }
 
     // Update is called once per frame

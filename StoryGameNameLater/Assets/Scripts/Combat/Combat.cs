@@ -42,7 +42,7 @@ public class Combat : MonoBehaviour
 
     public int d = 0;
     public GameObject player;
-    int i = 0;
+    public int i = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,6 +55,7 @@ public class Combat : MonoBehaviour
     {
         if(isinCombat == true && hasChange == false)
         {
+            i = 0;
             hasChange = true;
             pauseable = GameObject.FindGameObjectsWithTag("PauseWhenInCombat");
             for(int i = 0; i < pauseable.Length; i++)
@@ -83,7 +84,7 @@ public class Combat : MonoBehaviour
             }
             
             
-            SetPlayerButtons();
+            
             SetTheEnemy();
             CombatFight();
             fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionOne = player.GetComponent<PlayersTeam>().companionOne;
@@ -94,6 +95,7 @@ public class Combat : MonoBehaviour
                 fightOrder[2] = fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionOneClone;
             if (player.GetComponent<PlayersTeam>().companionTwo != null)
                 fightOrder[4] = fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionTwoClone;
+            SetPlayerButtons();
         }
     }
     private void SetTheEnemy()
@@ -109,12 +111,19 @@ public class Combat : MonoBehaviour
     }
     private void SetPlayerButtons()
     {
-        
-        buttons[0].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1;
-        buttons[1].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2;
-        buttons[2].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3;
+        if(fightOrder[i] != null)
+        {
+            buttons[0].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1;
+            buttons[1].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2;
+            buttons[2].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3;
+            
+        }
+        Debug.Log(fightOrder[i]);
         i += 2;
-        if (i == 6)
+
+        if (i < 6 && fightOrder[i] == null)
+            i += 2;
+        if (i >= 6)
             i = 0;
     }
     private void CombatFight()
@@ -272,7 +281,6 @@ public class Combat : MonoBehaviour
         }
         Debug.Log(fightOrder[target].GetComponent<PlayersSpellsAttacks>().health);
         d++;
-        SetPlayerButtons();
     }
     private void Target()
     {
@@ -316,6 +324,7 @@ public class Combat : MonoBehaviour
         lastButtonPressedToAttack = 0;
         lastButtonPressed = 0;
         didAction = false;
+        SetPlayerButtons();
     }
     private void DieDieDieDie()
     {

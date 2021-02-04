@@ -54,7 +54,7 @@ public class PlayersSpellsAttacks : MonoBehaviour
         if (companionTwo != null)
         {
             companionTwoClone = companionTwo.transform.GetChild(2).gameObject;
-            tempost = Instantiate(companionTwoClone, new Vector3(-18f, 4f, 110), Quaternion.Euler(0, 45, 0));
+            tempost = Instantiate(companionTwoClone, new Vector3(-4f, 4f, 126), Quaternion.Euler(0, 45, 0));
             tempost.transform.rotation = Quaternion.Euler(0, 135, 0);
             companionTwoClone = tempost;
         }
