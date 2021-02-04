@@ -11,6 +11,10 @@ public class Combat : MonoBehaviour
     public GameObject[] pauseable;
     public bool hasChange = false;
     public int typeThatIsFighting = 0;
+    public float typeThatIsFightingCompOneUwU = 0.5f;
+    public string inCombatWithCompOneUwU = "";
+    public float typeThatIsFightingCompTwoUwU = 0.5f;
+    public string inCombatWithCompTwoUwU = "";
     public GameObject[] fightOrder;
     public float[] fightOrderTeam; // 0 is players, 1 is enemies
 
@@ -34,12 +38,16 @@ public class Combat : MonoBehaviour
     //In combat Stats for team
     public float playerTeamHealth = 0;
     public float enemyTeamHealth = 0;
+    public int numberOnPlayersTeam = 0; 
 
-    int d = 0;
+    public int d = 0;
+    public GameObject player;
+    int i = 0;
     // Start is called before the first frame update
     void Start()
     {
         SetPlayerButtons();
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -56,13 +64,36 @@ public class Combat : MonoBehaviour
             }
             playerCam.SetActive(false);
             battleCam.SetActive(true);
-            GameObject tempo = Instantiate(allEnemys[typeThatIsFighting], new Vector3(15f, 4f, 92.1f), Quaternion.Euler(0, -45, 0));
+            GameObject tempe;
+            GameObject tempa;
+            GameObject tempo = Instantiate(allEnemys[typeThatIsFighting], new Vector3(8, 4f, 99.1f), Quaternion.Euler(0, -45, 0));
             tempo.name = inCombatWith;
             fightOrder[1] = tempo;
+            if(typeThatIsFightingCompOneUwU != 0.5)
+            {
+                tempa = Instantiate(allEnemys[(int)typeThatIsFightingCompOneUwU], new Vector3(8, 4f, 89.1f), Quaternion.Euler(0, -45, 0));
+                tempa.name = inCombatWithCompOneUwU;
+                fightOrder[3] = tempa;
+            }
+            if (typeThatIsFightingCompTwoUwU != 0.5)
+            {
+                tempe = Instantiate(allEnemys[(int)typeThatIsFightingCompTwoUwU], new Vector3(18f, 4f, 99.1f), Quaternion.Euler(0, -45, 0));
+                tempe.name = inCombatWithCompTwoUwU;
+                fightOrder[5] = tempe;
+            }
+            
+            
             SetPlayerButtons();
             SetTheEnemy();
             CombatFight();
-            
+            fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionOne = player.GetComponent<PlayersTeam>().companionOne;
+            fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionTwo = player.GetComponent<PlayersTeam>().companionTwo;
+            fightOrder[0].GetComponent<PlayersSpellsAttacks>().CreateComplanions();
+
+            if (player.GetComponent<PlayersTeam>().companionOne != null)
+                fightOrder[2] = fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionOneClone;
+            if (player.GetComponent<PlayersTeam>().companionTwo != null)
+                fightOrder[4] = fightOrder[0].GetComponent<PlayersSpellsAttacks>().companionTwoClone;
         }
     }
     private void SetTheEnemy()
@@ -74,13 +105,17 @@ public class Combat : MonoBehaviour
         if (fightOrder[3] != null)
             buttons[4].GetComponentInChildren<Text>().text = fightOrder[3].name;
         if (fightOrder[5] != null)
-            buttons[4].GetComponentInChildren<Text>().text = fightOrder[5].name;
+            buttons[5].GetComponentInChildren<Text>().text = fightOrder[5].name;
     }
     private void SetPlayerButtons()
     {
-        buttons[0].GetComponentInChildren<Text>().text = fightOrder[0].GetComponent<PlayersSpellsAttacks>().attack1;
-        buttons[1].GetComponentInChildren<Text>().text = fightOrder[0].GetComponent<PlayersSpellsAttacks>().attack2;
-        buttons[2].GetComponentInChildren<Text>().text = fightOrder[0].GetComponent<PlayersSpellsAttacks>().attack3;
+        
+        buttons[0].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1;
+        buttons[1].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2;
+        buttons[2].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3;
+        i += 2;
+        if (i == 6)
+            i = 0;
     }
     private void CombatFight()
     {
@@ -92,6 +127,7 @@ public class Combat : MonoBehaviour
                 if (i % 2 == 0)
                 {
                     playerTeamHealth += tempo.GetComponent<PlayersSpellsAttacks>().health;
+                    numberOnPlayersTeam++;
                 }
                 else
                 {
@@ -155,19 +191,88 @@ public class Combat : MonoBehaviour
                     {
                         damageAmount = fightOrder[d].GetComponent<PlayersSpellsAttacks>().attack3Damage;
                         InvokeRepeating("Target", 0.01f, 0.5f);
-
                     }
                 }
                 else
                 {
-                    Debug.Log(damageAmount);
+                    float tempe = Random.Range(0, 3) + 1;
+                    if(tempe == 2)
+                    {
+
+                    }
+                    else if(tempe == 1 || tempe == 3)
+                    {
+                        float tempa = Random.Range(0, numberOnPlayersTeam) + 1;
+                        if(tempa == 1)
+                        {
+                            if(tempe == 1)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack1Damage;
+                            }
+                            else if (tempe == 3)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack3Damage;
+                            }
+                            target = 0;
+                            EnemyAttackRound();
+                        }
+                        else if (tempa == 2)
+                        {
+                            if (tempe == 1)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack1Damage;
+                            }
+                            else if (tempe == 3)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack3Damage;
+                            }
+                            target = 2;
+                            EnemyAttackRound();
+                        }
+                        else if (tempa == 3)
+                        {
+                            if (tempe == 1)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack1Damage;
+                            }
+                            else if (tempe == 3)
+                            {
+                                damageAmount = fightOrder[d].GetComponent<EnemyInfo>().attack3Damage;
+                            }
+                            target = 4;
+                            EnemyAttackRound();
+                        }
+                    }
                 }
+            }
+            else if (fightOrder[d] == null)
+            {
+                d++;
+                
+            }
+            if (d >= 6)
+            {
+                d = 0;
             }
         }
         else
         {
-            return;
+            CancelInvoke("combatTurnBase");
+            DieDieDieDie();
         }
+    }
+    private void EnemyAttackRound()
+    {
+        damageBeingDone = damageAmount / fightOrder[target].GetComponent<PlayersSpellsAttacks>().armor;
+        fightOrder[target].GetComponent<PlayersSpellsAttacks>().health -= damageBeingDone;
+        playerTeamHealth -= damageBeingDone;
+        if(fightOrder[target].GetComponent<PlayersSpellsAttacks>().health <= 0)
+        {
+            playerTeamHealth -= fightOrder[target].GetComponent<PlayersSpellsAttacks>().health;
+        }
+        Debug.Log(fightOrder[target].GetComponent<PlayersSpellsAttacks>().health);
+        d++;
+        SetPlayerButtons();
     }
     private void Target()
     {
@@ -199,8 +304,31 @@ public class Combat : MonoBehaviour
     }
     private void DoDamage()
     {
-        damageBeingDone = damageAmount - fightOrder[target].GetComponent<EnemyInfo>().armor;
+        damageBeingDone = damageAmount / fightOrder[target].GetComponent<EnemyInfo>().armor;
         fightOrder[target].GetComponent<EnemyInfo>().health -= damageBeingDone;
+        enemyTeamHealth -= damageBeingDone;
+        if (fightOrder[target].GetComponent<EnemyInfo>().health <= 0)
+        {
+            enemyTeamHealth -= fightOrder[target].GetComponent<EnemyInfo>().health;
+        }
+        Debug.Log(fightOrder[target].GetComponent<EnemyInfo>().health);
         CancelInvoke("Target");
+        lastButtonPressedToAttack = 0;
+        lastButtonPressed = 0;
+        didAction = false;
+    }
+    private void DieDieDieDie()
+    {
+        if(playerTeamHealth == 0 || enemyTeamHealth == 0)
+        {
+            isinCombat = false;
+            for (int i = 0; i < pauseable.Length; i++)
+            {
+                pauseable[i].GetComponent<DetectPlayAndMove>().enabled = true;
+                pauseable[i].GetComponent<DetectPlayAndMove>().Start();
+            }
+            playerCam.SetActive(true);
+            battleCam.SetActive(false);
+        }
     }
 }

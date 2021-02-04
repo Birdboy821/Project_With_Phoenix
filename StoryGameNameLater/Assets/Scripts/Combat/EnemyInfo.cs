@@ -22,4 +22,6 @@ public class EnemyInfo : MonoBehaviour
     public string attack3AttackType;
     public string attack3;
     public float attack3Damage;
+
+   
 }
