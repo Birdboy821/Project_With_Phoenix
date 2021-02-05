@@ -298,6 +298,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d9e8d27645d3b940be7c80550847b22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magicEmblems:
+  - {fileID: 21300000, guid: 64f843d4d1d7019419263eff7275d113, type: 3}
+  - {fileID: 21300000, guid: c461b2f39a27abd4788870a2411c28d6, type: 3}
+  - {fileID: 21300000, guid: 61edf8c068d4ffb44ad942a732b5aef8, type: 3}
+  - {fileID: 21300000, guid: 9b9f87ad11df15345bb7f6d728732eca, type: 3}
+  - {fileID: 21300000, guid: b97dcd4e20037ec4984ea2a686947d1a, type: 3}
+  - {fileID: 21300000, guid: a773fbf082ab903419a30ca740eb1d10, type: 3}
+  - {fileID: 21300000, guid: e8de5b0b86969ba49a1cbafd91e5adb5, type: 3}
+  - {fileID: 21300000, guid: c230299b65d84734faed4bddbc0f265f, type: 3}
   isinCombat: 0
   inCombatWith: 
   pauseable: []
@@ -420,7 +429,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 56
-    m_Alignment: 4
+    m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -497,7 +506,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 56
-    m_Alignment: 4
+    m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -796,7 +805,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 56
-    m_Alignment: 4
+    m_Alignment: 8
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -959,8 +968,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -760, y: -300}
-  m_SizeDelta: {x: 320, y: 120}
+  m_AnchoredPosition: {x: -760, y: -150}
+  m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &525807793
 MonoBehaviour:
@@ -1088,8 +1097,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -760, y: -450}
-  m_SizeDelta: {x: 320, y: 120}
+  m_AnchoredPosition: {x: -760, y: -400}
+  m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &620300735
 MonoBehaviour:
@@ -1310,8 +1319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -760, y: -150}
-  m_SizeDelta: {x: 320, y: 120}
+  m_AnchoredPosition: {x: -760, y: 100}
+  m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699113720
 MonoBehaviour:
@@ -2503,16 +2512,16 @@ MonoBehaviour:
   health: 100
   armor: 20
   mana: 100
-  attack1Type: 
+  attack1Type: Fire
   attack1AttackType: Offensive
   attack1: tempo
   attack1Damage: 120
-  attack2Type: 
+  attack2Type: Water
   attack2AttackType: Defensive
   attack2: tempe
   attack2Damage: 0
-  attack3Type: 
-  attack3AttackType: 
+  attack3Type: Dark
+  attack3AttackType: Offensive
   attack3: tempto
   attack3Damage: 60
   companionOne: {fileID: 0}
@@ -2898,6 +2907,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1336624501148282658, guid: f923c8b98bc9b6b44b89f7517ae81d58,
+        type: 3}
+      propertyPath: attack1Type
+      value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336624501148282658, guid: f923c8b98bc9b6b44b89f7517ae81d58,
+        type: 3}
+      propertyPath: attack2Type
+      value: Light
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336624501148282658, guid: f923c8b98bc9b6b44b89f7517ae81d58,
+        type: 3}
+      propertyPath: attack3Type
+      value: General
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336624501148282658, guid: f923c8b98bc9b6b44b89f7517ae81d58,
+        type: 3}
+      propertyPath: attack3AttackType
+      value: Offensive
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f923c8b98bc9b6b44b89f7517ae81d58, type: 3}
 --- !u!1001 &7799048660563422380
@@ -2967,6 +2996,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7799048660759703939, guid: 55868d265098c7540851304efb19d98f,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a105b6610d82adc48946c01514f1d166, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55868d265098c7540851304efb19d98f, type: 3}
 --- !u!1001 &7919973885463260401
@@ -3035,6 +3069,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
+        type: 3}
+      propertyPath: attack3AttackType
+      value: Offensive
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
+        type: 3}
+      propertyPath: attack3Type
+      value: General
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
+        type: 3}
+      propertyPath: attack2Type
+      value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
+        type: 3}
+      propertyPath: attack1Type
+      value: Water
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84fa45fc8b91ad49a7fa9782b277093, type: 3}

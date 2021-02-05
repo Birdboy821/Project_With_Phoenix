@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Combat : MonoBehaviour
 {
+    //Magic Carp
+    public Sprite[] magicEmblems;
     // Combat Status
     public bool isinCombat = false;
     public string inCombatWith = "";
@@ -114,9 +116,27 @@ public class Combat : MonoBehaviour
         if(fightOrder[i] != null)
         {
             buttons[0].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1;
+            foreach(Sprite typeUwU in magicEmblems)
+            {
+                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1Type);
+                if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1Type)
+                    buttons[0].GetComponent<Image>().sprite = typeUwU;
+            }
             buttons[1].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2;
+            foreach (Sprite typeUwU in magicEmblems)
+            {
+                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2Type);
+                if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2Type)
+                    buttons[1].GetComponent<Image>().sprite = typeUwU;
+            }
             buttons[2].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3;
-            
+            foreach (Sprite typeUwU in magicEmblems)
+            {
+                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3Type);
+                if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3Type)
+                    buttons[2].GetComponent<Image>().sprite = typeUwU;
+            }
+
         }
         Debug.Log(fightOrder[i]);
         i += 2;
