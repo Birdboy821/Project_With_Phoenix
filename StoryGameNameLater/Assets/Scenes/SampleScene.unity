@@ -341,6 +341,7 @@ MonoBehaviour:
   - {fileID: 248805402}
   - {fileID: 912776040}
   - {fileID: 2043203326}
+  buttonFolder: {fileID: 1686310989}
   lastButtonPressed: 0
   lastButtonPressedToAttack: 0
   damageAmount: 0
@@ -642,8 +643,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1063518425}
-  m_Father: {fileID: 2046588041}
-  m_RootOrder: 3
+  m_Father: {fileID: 1686310990}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1707,8 +1708,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 81852977}
-  m_Father: {fileID: 2046588041}
-  m_RootOrder: 4
+  m_Father: {fileID: 1686310990}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2289,6 +2290,44 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1661007600}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1686310989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1686310990}
+  m_Layer: 5
+  m_Name: ButtonsFolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1686310990
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686310989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 248805405}
+  - {fileID: 912776043}
+  - {fileID: 2043203325}
+  m_Father: {fileID: 2046588041}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1744790521
 GameObject:
   m_ObjectHideFlags: 0
@@ -2559,8 +2598,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 819709240}
-  m_Father: {fileID: 2046588041}
-  m_RootOrder: 5
+  m_Father: {fileID: 1686310990}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2750,9 +2789,7 @@ RectTransform:
   - {fileID: 699113719}
   - {fileID: 525807792}
   - {fileID: 620300734}
-  - {fileID: 248805405}
-  - {fileID: 912776043}
-  - {fileID: 2043203325}
+  - {fileID: 1686310990}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3078,17 +3115,17 @@ PrefabInstance:
     - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
         type: 3}
       propertyPath: attack3Type
-      value: General
+      value: Earth
       objectReference: {fileID: 0}
     - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
         type: 3}
       propertyPath: attack2Type
-      value: Water
+      value: Wind
       objectReference: {fileID: 0}
     - target: {fileID: 9171591181011290078, guid: b84fa45fc8b91ad49a7fa9782b277093,
         type: 3}
       propertyPath: attack1Type
-      value: Water
+      value: Thunder
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b84fa45fc8b91ad49a7fa9782b277093, type: 3}

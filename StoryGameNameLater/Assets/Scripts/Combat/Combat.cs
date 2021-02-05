@@ -28,6 +28,7 @@ public class Combat : MonoBehaviour
     
     //PlayerButtons
     public Button[] buttons;
+    public GameObject buttonFolder;
     public float lastButtonPressed = 0;
     public float lastButtonPressedToAttack = 0;
 
@@ -57,6 +58,8 @@ public class Combat : MonoBehaviour
     {
         if(isinCombat == true && hasChange == false)
         {
+            buttonFolder.SetActive(true);
+            Debug.Log(buttons[3].enabled);
             i = 0;
             hasChange = true;
             pauseable = GameObject.FindGameObjectsWithTag("PauseWhenInCombat");
@@ -118,21 +121,18 @@ public class Combat : MonoBehaviour
             buttons[0].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1;
             foreach(Sprite typeUwU in magicEmblems)
             {
-                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1Type);
                 if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack1Type)
                     buttons[0].GetComponent<Image>().sprite = typeUwU;
             }
             buttons[1].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2;
             foreach (Sprite typeUwU in magicEmblems)
             {
-                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2Type);
                 if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack2Type)
                     buttons[1].GetComponent<Image>().sprite = typeUwU;
             }
             buttons[2].GetComponentInChildren<Text>().text = fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3;
             foreach (Sprite typeUwU in magicEmblems)
             {
-                Debug.Log(fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3Type);
                 if (typeUwU.name == fightOrder[i].GetComponent<PlayersSpellsAttacks>().attack3Type)
                     buttons[2].GetComponent<Image>().sprite = typeUwU;
             }
@@ -345,6 +345,7 @@ public class Combat : MonoBehaviour
         lastButtonPressed = 0;
         didAction = false;
         SetPlayerButtons();
+        CheckIfTheCurrentThingHasHealth();
     }
     private void DieDieDieDie()
     {
@@ -358,6 +359,39 @@ public class Combat : MonoBehaviour
             }
             playerCam.SetActive(true);
             battleCam.SetActive(false);
+            buttonFolder.SetActive(false);
         }
+    }
+
+    private void CheckIfTheCurrentThingHasHealth()
+    {
+        for(int gghhg = 0; gghhg < fightOrder.Length; gghhg++)
+        {
+            if (gghhg % 2 == 1)
+            {
+                if(fightOrder[gghhg] != null)
+                    if (fightOrder[gghhg].GetComponent<EnemyInfo>().health <= 0)
+                    {
+                        fightOrder[gghhg] = null;
+                        if (gghhg == 1)
+                        {
+                            buttons[3].GetComponentInChildren<Text>().text = "Died";
+                            fightOrder[1] = null;
+                        }
+                        if (gghhg == 3)
+                        {
+                            buttons[4].GetComponentInChildren<Text>().text = "Died";
+                            fightOrder[3] = null;
+                        }
+                        if (gghhg == 5)
+                        {
+                            buttons[5].GetComponentInChildren<Text>().text = "Died";
+                            fightOrder[5] = null;
+                        }
+                    }
+            }
+        }
+        
+        
     }
 }
