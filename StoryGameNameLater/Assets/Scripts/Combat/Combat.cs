@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -59,7 +60,6 @@ public class Combat : MonoBehaviour
         if(isinCombat == true && hasChange == false)
         {
             buttonFolder.SetActive(true);
-            Debug.Log(buttons[3].enabled);
             i = 0;
             hasChange = true;
             pauseable = GameObject.FindGameObjectsWithTag("PauseWhenInCombat");
@@ -224,14 +224,14 @@ public class Combat : MonoBehaviour
                 }
                 else
                 {
-                    float tempe = Random.Range(0, 3) + 1;
+                    float tempe = UnityEngine.Random.Range(0, 3) + 1;
                     if(tempe == 2)
                     {
 
                     }
                     else if(tempe == 1 || tempe == 3)
                     {
-                        float tempa = Random.Range(0, numberOnPlayersTeam) + 1;
+                        float tempa = UnityEngine.Random.Range(0, numberOnPlayersTeam) + 1;
                         if(tempa == 1)
                         {
                             if(tempe == 1)
@@ -352,14 +352,20 @@ public class Combat : MonoBehaviour
         if(playerTeamHealth == 0 || enemyTeamHealth == 0)
         {
             isinCombat = false;
-            for (int i = 0; i < pauseable.Length; i++)
+            for (int ig = 0; ig < pauseable.Length; ig++)
             {
-                pauseable[i].GetComponent<DetectPlayAndMove>().enabled = true;
-                pauseable[i].GetComponent<DetectPlayAndMove>().Start();
+                pauseable[ig].GetComponent<DetectPlayAndMove>().enabled = true;
+                pauseable[ig].GetComponent<DetectPlayAndMove>().Start();
             }
             playerCam.SetActive(true);
             battleCam.SetActive(false);
             buttonFolder.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            i = 0;
+            SetPlayerButtons();
+            hasChange = false;
+            GameObject remove = Array.Find(pauseable, element => element.name == inCombatWith);
+            Destroy(remove);
         }
     }
 
@@ -372,26 +378,26 @@ public class Combat : MonoBehaviour
                 if(fightOrder[gghhg] != null)
                     if (fightOrder[gghhg].GetComponent<EnemyInfo>().health <= 0)
                     {
-                        fightOrder[gghhg] = null;
                         if (gghhg == 1)
                         {
                             buttons[3].GetComponentInChildren<Text>().text = "Died";
+                            DestroyImmediate(fightOrder[1].gameObject);
                             fightOrder[1] = null;
                         }
                         if (gghhg == 3)
                         {
                             buttons[4].GetComponentInChildren<Text>().text = "Died";
+                            DestroyImmediate(fightOrder[3].gameObject);
                             fightOrder[3] = null;
                         }
                         if (gghhg == 5)
                         {
                             buttons[5].GetComponentInChildren<Text>().text = "Died";
+                            DestroyImmediate(fightOrder[5].gameObject);
                             fightOrder[5] = null;
                         }
                     }
             }
         }
-        
-        
     }
 }

@@ -30,8 +30,6 @@ public class DetectPlayAndMove : MonoBehaviour
         InvokeRepeating("MoveMent", 1, 1);
         if (companionOneUwU != null || companionTwoUwU != null)
             Invoke("CompanionCrap", 2);
-        
-            
     }
     private void CompanionCrap()
     {

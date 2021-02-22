@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7799048660759703966}
   - component: {fileID: 7799048660759703960}
   - component: {fileID: 3851877381056946624}
+  - component: {fileID: 4289504352782299690}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -65,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a105b6610d82adc48946c01514f1d166, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -185,6 +186,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   companionOne: {fileID: 0}
   companionTwo: {fileID: 0}
+--- !u!114 &4289504352782299690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7799048660759703936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b623e4013b8a863468ba7473c3cf2769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack1: 
+  attack2: 
+  attack3: 
+  inCombatState: {fileID: 0}
+  _CM: {fileID: 0}
+  _CM_CS: {fileID: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  jumpHeight: 5
+  gravity: -10
 --- !u!1 &7799048661002446391
 GameObject:
   m_ObjectHideFlags: 0
