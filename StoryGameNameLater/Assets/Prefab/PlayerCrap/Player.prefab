@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7799048660759703965}
   - component: {fileID: 7799048660759703964}
   - component: {fileID: 7799048660759703939}
-  - component: {fileID: 7799048660759703938}
   - component: {fileID: 7799048660759703937}
   - component: {fileID: 7799048660759703967}
   - component: {fileID: 7799048660759703966}
@@ -66,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a105b6610d82adc48946c01514f1d166, type: 2}
+  - {fileID: 2100000, guid: 03b050850475c12489a1257ee01a63d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,20 +86,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &7799048660759703938
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7799048660759703936}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &7799048660759703937
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -140,6 +125,7 @@ MonoBehaviour:
     m_Bits: 256
   velocity: {x: 0, y: 0, z: 0}
   isGrounded: 0
+  _POOCUS: {fileID: 4289504352782299690}
 --- !u!143 &7799048660759703966
 CharacterController:
   m_ObjectHideFlags: 0
@@ -205,8 +191,13 @@ MonoBehaviour:
   _CM: {fileID: 0}
   _CM_CS: {fileID: 0}
   velocity: {x: 0, y: 0, z: 0}
-  jumpHeight: 5
+  jumpHeight: 0.3
   gravity: -10
+  controller: {fileID: 7799048660759703966}
+  _MS: {fileID: 0}
+  fireballIN: {fileID: 7388518471703059612, guid: 0f9f4c99709e84348be49572afdd19e7,
+    type: 3}
+  fireballOB: {fileID: 0}
 --- !u!1 &7799048661002446391
 GameObject:
   m_ObjectHideFlags: 0

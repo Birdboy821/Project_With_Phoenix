@@ -62,11 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BoatCarp\BadBoatMove.cs" />
+    <Compile Include="Assets\Scripts\BoatCarp\CannonBall.cs" />
+    <Compile Include="Assets\Scripts\BoatCarp\FireCannon.cs" />
+    <Compile Include="Assets\Scripts\BoatCarp\MoveBoat.cs" />
     <Compile Include="Assets\Scripts\Combat\Combat.cs" />
     <Compile Include="Assets\Scripts\Combat\DetectPlayAndMove.cs" />
     <Compile Include="Assets\Scripts\Combat\EnemyInfo.cs" />
     <Compile Include="Assets\Scripts\Companions\CompanionsHeadTracking.cs" />
     <Compile Include="Assets\Scripts\Companions\CompanionsPathing.cs" />
+    <Compile Include="Assets\Scripts\Fireball.cs" />
     <Compile Include="Assets\Scripts\Players\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Players\MovementScript.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerOutOfCombatUseSpell.cs" />
