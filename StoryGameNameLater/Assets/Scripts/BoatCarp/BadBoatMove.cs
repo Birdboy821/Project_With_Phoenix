@@ -16,8 +16,24 @@ public class BadBoatMove : MonoBehaviour
     public Quaternion smoothRotateAmount = Quaternion.Euler(0, 1, 0);
     public float newRotationAngle;
 
-    public float currentRotation;
+    public int currentRotation;
     public bool canStopRotaion;
+
+    public float legA = 0;
+    public float legB = 0;
+    public float distantSquared = 0;
+    public float distantsToPlayer = 0;
+
+    public GameObject player;
+
+    public bool isTracking = false;
+
+    public float fireChance;
+
+    public GameObject CannonBallIN;
+    public GameObject CannonBallOB;
+
+    public bool StartedToFireCannons = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +41,9 @@ public class BadBoatMove : MonoBehaviour
         InvokeRepeating("CheckIfRotateFinished", 0.1f, 0.1f);
         Debug.Log(gameObject.transform.localRotation.y);
         newRotationAngle = gameObject.transform.localRotation.y;
-        currentRotation = gameObject.transform.localRotation.y;
+        currentRotation = (int)Mathf.Round(gameObject.transform.localRotation.eulerAngles.y);
+        player = GameObject.Find("BoatTempoi");
+
     }
 
     // Update is called once per frame
@@ -38,8 +56,8 @@ public class BadBoatMove : MonoBehaviour
         else if (speedChange == 2)
             speed = highSpeed;
 
-        
 
+        CheckIfPlayerIsInRange();
         _RB_Boat.AddRelativeForce(Vector3.forward * speed * 5);
     }
 
@@ -49,7 +67,7 @@ public class BadBoatMove : MonoBehaviour
     }
     public void JIJI()
     {
-        rotationChance = Random.Range(0, 3);
+        rotationChance = Random.Range(1, 3);
 
         if (rotationChance == 0)
         {
@@ -71,19 +89,27 @@ public class BadBoatMove : MonoBehaviour
     {
         //newRotationAngle = gameObject.transform.localRotation.y + howmuch;
         InvokeRepeating("LPLP", 0.5f, 0.5f);
-        
+
     }
     public void LPLP()
     {
-        /*
-        if(howmuch >= 0)
-            gameObject.transform.Rotate(0, 1f, 0);
-        else if (howmuch <= 0)
-            gameObject.transform.Rotate(0, -1f, 0);
-        */
-        currentRotation += 0.5f;
+        if (howmuch > currentRotation)
+        {
+            if (howmuch >= currentRotation)
+                currentRotation += 1;
+            else if (howmuch <= currentRotation)
+                currentRotation -= 1;
+        }
+        else if (howmuch < currentRotation)
+        {
+            if (howmuch <= currentRotation)
+                currentRotation -= 1;
+            else if (howmuch >= currentRotation)
+                currentRotation += 1;
+        }
+
         transform.localRotation = Quaternion.Euler(0f, currentRotation, 0f);
-        if (currentRotation >= howmuch)
+        if (currentRotation == howmuch)
         {
             canStopRotaion = true;
         }
@@ -102,15 +128,98 @@ public class BadBoatMove : MonoBehaviour
             Debug.Log(Mathf.Floor(gameObject.transform.eulerAngles.y));
         }
         */
-        Debug.Log(gameObject.transform.rotation.y);
+        //Debug.Log(Mathf.Round(gameObject.transform.localRotation.eulerAngles.y));
 
-        
+
 
         if (canStopRotaion == true)
         {
             CancelInvoke("LPLP");
             JIJI();
             canStopRotaion = false;
+        }
+    }
+
+    public void CheckIfPlayerIsInRange()
+    {
+        legA = gameObject.transform.position.x - player.transform.position.x;
+        legB = gameObject.transform.position.z - player.transform.position.z;
+        distantSquared = Mathf.Pow(legA, 2) + Mathf.Pow(legB, 2);
+        distantsToPlayer = Mathf.Sqrt(distantSquared);
+
+        if (distantsToPlayer <= 20)
+        {
+            gameObject.transform.LookAt(new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z));
+            gameObject.transform.Rotate(new Vector3(0, 90, 0));
+            CancelInvoke("LPLP");
+            isTracking = true;
+            StartCannonFire();
+        }
+        else if (distantsToPlayer > 20 && isTracking == true)
+        {
+            CancelInvoke("CanFireCannonAtWill");
+            StartedToFireCannons = false;
+            canStopRotaion = true;
+            CheckIfRotateFinished();
+            isTracking = false;
+        }
+
+    }
+    public void StartCannonFire()
+    {
+        if(StartedToFireCannons == false)
+        {
+            StartedToFireCannons = true;
+            InvokeRepeating("CanFireCannonAtWill", 0.1f, 2f);
+        }
+    }
+    public void CanFireCannonAtWill()
+    {
+        fireChance = Random.Range(0, 5);
+
+        if(fireChance == 0)
+        {
+            //Nothing
+        }
+        else if(fireChance == 1)
+        {
+            //Fire Left
+            CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1, -1);
+            CannonBallOB.transform.rotation = gameObject.transform.rotation;
+            CannonBallOB.transform.parent = gameObject.transform.parent;
+            CannonBallOB.GetComponent<CannonBall>().MoveFireball();
+            CannonBallOB.GetComponent<CannonBall>().InvokeRepeating("DestroyFireball", 5f, 1);
+        }
+        else if (fireChance == 2)
+        {
+            //Fire Right
+            CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1, -1);
+            CannonBallOB.transform.rotation = gameObject.transform.rotation;
+            CannonBallOB.transform.parent = gameObject.transform.parent;
+            CannonBallOB.GetComponent<CannonBall>().MoveFireballRight();
+            CannonBallOB.GetComponent<CannonBall>().InvokeRepeating("DestroyFireball", 5f, 1);
+        }
+        else if (fireChance == 3)
+        {
+            //Left Jam
+            CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1, 1);
+            CannonBallOB.transform.rotation = gameObject.transform.rotation;
+            CannonBallOB.transform.parent = gameObject.transform.parent;
+            CannonBallOB.GetComponent<CannonBall>().MoveFireball();
+            CannonBallOB.GetComponent<CannonBall>().InvokeRepeating("DestroyFireball", 5f, 1);
+        }
+        else if (fireChance == 4)
+        {
+            //Right Jam
+            CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
+            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1, 1);
+            CannonBallOB.transform.rotation = gameObject.transform.rotation;
+            CannonBallOB.transform.parent = gameObject.transform.parent;
+            CannonBallOB.GetComponent<CannonBall>().MoveFireballRight();
+            CannonBallOB.GetComponent<CannonBall>().InvokeRepeating("DestroyFireball", 5f, 1);
         }
     }
 }

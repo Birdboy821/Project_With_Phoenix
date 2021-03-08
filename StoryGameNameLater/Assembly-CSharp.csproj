@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Companions\CompanionsHeadTracking.cs" />
     <Compile Include="Assets\Scripts\Companions\CompanionsPathing.cs" />
     <Compile Include="Assets\Scripts\Fireball.cs" />
+    <Compile Include="Assets\Scripts\Players\DisplayPlayersHealth.cs" />
     <Compile Include="Assets\Scripts\Players\MouseLook.cs" />
     <Compile Include="Assets\Scripts\Players\MovementScript.cs" />
     <Compile Include="Assets\Scripts\Players\PlayerOutOfCombatUseSpell.cs" />
@@ -121,6 +122,12 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/CyberPatriot/Documents/GitHub/Project_With_Phoenix/StoryGameNameLater/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>C:/Users/CyberPatriot/Documents/GitHub/Project_With_Phoenix/StoryGameNameLater/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>C:/Users/CyberPatriot/Documents/GitHub/Project_With_Phoenix/StoryGameNameLater/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.5f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

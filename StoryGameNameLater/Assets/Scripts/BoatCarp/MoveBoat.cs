@@ -33,7 +33,6 @@ public class MoveBoat : MonoBehaviour
     }
     public void OnMouseOver()
     {
-        Debug.Log("TEST!");
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             boatInterface.SetActive(true);

@@ -20,6 +20,11 @@ public class CannonBall : MonoBehaviour
     {
         fireball_RB.AddRelativeForce(Vector3.left * 2000 * -1);
     }
+    public void MoveFireballRight()
+    {
+        fireball_RB.AddRelativeForce(Vector3.right * 2000 * -1);
+    }
+
 
     public void OnTriggerEnter(Collider collision)
     {
