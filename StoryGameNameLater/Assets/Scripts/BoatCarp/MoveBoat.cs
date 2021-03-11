@@ -10,6 +10,13 @@ public class MoveBoat : MonoBehaviour
 
     public bool isinboat = false;
     public MouseLook _MLS;
+
+    public float health = 1000;
+
+    public GameObject boatHealth;
+    public GameObject playerHealth;
+
+    public bool isMoving = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,11 +28,17 @@ public class MoveBoat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("w") && isinboat == true)
+        if(Input.GetKeyDown("w") && isinboat == true && isMoving == false)
         {
-            MakeBoatMove();
+            InvokeRepeating("MakeBoatMove", 0.01f, 0.01f);
+            isMoving = true;
         }
-        if(Input.GetKey("a") || Input.GetKey("d"))
+        else if (Input.GetKeyDown("w") && isinboat == true && isMoving == true)
+        {
+            CancelInvoke("MakeBoatMove");
+            isMoving = false;
+        }
+        if (Input.GetKey("a") || Input.GetKey("d"))
         {
             float rotation = Input.GetAxis("Horizontal");
             gameObject.transform.Rotate(0, rotation, 0);
@@ -51,6 +64,10 @@ public class MoveBoat : MonoBehaviour
         isinboat = true;
         Cursor.lockState = CursorLockMode.Locked;
         _MLS.enabled = true;
+        playerHealth.SetActive(false);
+        boatHealth.SetActive(true);
+
+        player.GetComponent<CapsuleCollider>().enabled = false;
     }
     public void IfPlayerSaysNo()
     {
@@ -58,6 +75,7 @@ public class MoveBoat : MonoBehaviour
     }
     public void MakeBoatMove()
     {
-        _BoatRB.AddRelativeForce(Vector3.forward * 50);
+        //_BoatRB.AddRelativeForce(Vector3.forward * 1000000);
+        gameObject.transform.position += transform.forward * Time.deltaTime * 1f;
     }
 }

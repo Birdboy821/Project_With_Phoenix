@@ -34,6 +34,8 @@ public class BadBoatMove : MonoBehaviour
     public GameObject CannonBallOB;
 
     public bool StartedToFireCannons = false;
+
+    public float boatHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +61,8 @@ public class BadBoatMove : MonoBehaviour
 
         CheckIfPlayerIsInRange();
         _RB_Boat.AddRelativeForce(Vector3.forward * speed * 5);
+        if (boatHealth <= 0)
+            Destroy(gameObject);
     }
 
     public void HUHU()
@@ -147,7 +151,7 @@ public class BadBoatMove : MonoBehaviour
         distantSquared = Mathf.Pow(legA, 2) + Mathf.Pow(legB, 2);
         distantsToPlayer = Mathf.Sqrt(distantSquared);
 
-        if (distantsToPlayer <= 20)
+        if (distantsToPlayer <= 30)
         {
             gameObject.transform.LookAt(new Vector3(player.transform.position.x, gameObject.transform.position.y, player.transform.position.z));
             gameObject.transform.Rotate(new Vector3(0, 90, 0));
@@ -155,7 +159,7 @@ public class BadBoatMove : MonoBehaviour
             isTracking = true;
             StartCannonFire();
         }
-        else if (distantsToPlayer > 20 && isTracking == true)
+        else if (distantsToPlayer > 30 && isTracking == true)
         {
             CancelInvoke("CanFireCannonAtWill");
             StartedToFireCannons = false;
@@ -170,7 +174,7 @@ public class BadBoatMove : MonoBehaviour
         if(StartedToFireCannons == false)
         {
             StartedToFireCannons = true;
-            InvokeRepeating("CanFireCannonAtWill", 0.1f, 2f);
+            InvokeRepeating("CanFireCannonAtWill", 0.1f, 4f);
         }
     }
     public void CanFireCannonAtWill()
@@ -185,7 +189,7 @@ public class BadBoatMove : MonoBehaviour
         {
             //Fire Left
             CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
-            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1, -1);
+            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1.6f, -1);
             CannonBallOB.transform.rotation = gameObject.transform.rotation;
             CannonBallOB.transform.parent = gameObject.transform.parent;
             CannonBallOB.GetComponent<CannonBall>().MoveFireball();
@@ -195,7 +199,7 @@ public class BadBoatMove : MonoBehaviour
         {
             //Fire Right
             CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
-            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1, -1);
+            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1.6f, -1);
             CannonBallOB.transform.rotation = gameObject.transform.rotation;
             CannonBallOB.transform.parent = gameObject.transform.parent;
             CannonBallOB.GetComponent<CannonBall>().MoveFireballRight();
@@ -205,7 +209,7 @@ public class BadBoatMove : MonoBehaviour
         {
             //Left Jam
             CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
-            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1, 1);
+            CannonBallOB.transform.localPosition = new Vector3(3.2f, 1.6f, 1);
             CannonBallOB.transform.rotation = gameObject.transform.rotation;
             CannonBallOB.transform.parent = gameObject.transform.parent;
             CannonBallOB.GetComponent<CannonBall>().MoveFireball();
@@ -215,7 +219,7 @@ public class BadBoatMove : MonoBehaviour
         {
             //Right Jam
             CannonBallOB = Instantiate(CannonBallIN, gameObject.transform.position, gameObject.transform.rotation, gameObject.transform);
-            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1, 1);
+            CannonBallOB.transform.localPosition = new Vector3(-3.2f, 1.6f, 1);
             CannonBallOB.transform.rotation = gameObject.transform.rotation;
             CannonBallOB.transform.parent = gameObject.transform.parent;
             CannonBallOB.GetComponent<CannonBall>().MoveFireballRight();

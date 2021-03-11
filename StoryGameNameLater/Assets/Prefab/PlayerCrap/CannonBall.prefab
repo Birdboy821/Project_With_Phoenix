@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball_RB: {fileID: 2350478005533161705}
+  damage: 100
 --- !u!54 &2350478005533161705
 Rigidbody:
   m_ObjectHideFlags: 0

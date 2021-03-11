@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - PauseWhenInCombat
+  - Boat
   layers:
   - Default
   - TransparentFX
